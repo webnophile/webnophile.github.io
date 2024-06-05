@@ -1,64 +1,409 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Webnophile - Grow your business with our custom website solutions.">
     <title>Webnophile</title>
-      <link rel="icon" href="logo.jpg">
+    <link rel="icon" href="logo.jpeg">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            background-color: #333;
+            flex-wrap: wrap;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            display: block;
+        }
+        nav ul li a:hover {
+            background-color: #575757;
+        }
+        #hero {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        #hero h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        #hero p {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        #hero a {
+            text-decoration: none;
+            background-color: #f90;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        section {
+            padding: 50px 20px;
+            text-align: center;
+        }
+        footer {
+            background-color: #333;
+            padding: 20px 0;
+            text-align: center;
+        }
+        footer ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        footer ul li {
+            margin: 0 15px;
+        }
+        footer ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        footer p {
+            margin: 10px 0 0;
+            font-size: 0.9em;
+        }
+        /* Slider CSS */
+        .slider {
+            position: relative;
+            max-width: 30%;
+            margin: auto;
+        }
+        .slides {
+            display: none;
+        }
+        .slider img {
+            width: 100%;
+            height: auto;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+        .dot-container {
+            text-align: center;
+            padding: 20px;
+            background: #333;
+        }
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+        .active, .dot:hover {
+            background-color: #717171;
+        }
+        .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 1.5s;
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+        @-webkit-keyframes fade {
+            from {opacity: .4} 
+            to {opacity: 1}
+        }
+        @keyframes fade {
+            from {opacity: .4} 
+            to {opacity: 1}
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            #hero h1 {
+                font-size: 2em;
+            }
+            #hero p {
+                font-size: 1em;
+            }
+            .slider {
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li a {
+                padding: 10px 15px;
+            }
+            #hero h1 {
+                font-size: 1.5em;
+            }
+            #hero p {
+                font-size: 0.9em;
+            }
+            #hero a {
+                padding: 8px 15px;
+            }
+            section {
+                padding: 30px 15px;
+            }
+            footer ul {
+                flex-direction: column;
+            }
+            footer ul li {
+                margin: 10px 0;
+            }
+        }
+        .wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        :root {
+            --index: calc(1vw + 1vh);
+            --transition: cubic-bezier(.1, .7, 0, 1);
+        }
+        .items {
+            display: flex;
+            gap: 0.4rem;
+            perspective: calc(var(--index) * 35);
+        }
+
+        .item {
+            width: calc(var(--index) * 3);
+            height: calc(var(--index) * 12);
+            background-color: #222;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            filter: grayscale(1) brightness(.5);
+            transition: transform 1.25s var(--transition), filter 3s var(--transition), width 1.25s var(--transition);
+            will-change: transform, filter, rotateY, width;
+        }
+
+        .item::before, .item::after {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 20px;
+            right: calc(var(--index) * -1);
+        }
+
+        .item::after {
+            left: calc(var(--index) * -1);
+        }
+
+        .items .item:hover {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * 10));
+        }
+
+        .items .item:hover + * {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * 8.5)) rotateY(35deg);
+            z-index: -1;
+        }
+
+        .items .item:hover + * + * {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * 5.6)) rotateY(40deg);
+            z-index: -2;
+        }
+
+        .items .item:hover + * + * + * {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * 2.5)) rotateY(30deg);
+            z-index: -3;
+        }
+
+        .items .item:hover + * + * + * + * {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * .6)) rotateY(15deg);
+            z-index: -4;
+        }
+
+        .items .item:has( + :hover) {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * 8.5)) rotateY(-35deg);
+        }
+
+        .items .item:has( + * + :hover) {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * 5.6)) rotateY(-40deg);
+        }
+
+        .items .item:has( + * + * + :hover) {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * 2.5)) rotateY(-30deg);
+        }
+
+        .items .item:has( + * + * + * + :hover) {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * .6)) rotateY(-15deg);
+        }
+
+        .items .item:active, .items .item:focus {
+            width: 28vw;
+            filter: inherit;
+            z-index: 100;
+            transform: translateZ(calc(var(--index) * 10));
+            margin: 0 .45vw;
+        }
+    </style>
 </head>
-<body bgcolor="black" style="color: white;">
+<body>
     <header>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Templates</a></li>
-                <li><a href="#">Our Previous Work</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#templates">Templates</a></li>
+                <li><a href="#previous-work">Our Previous Work</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact Us</a></li>
             </ul>
         </nav>
     </header>
 
     <section id="hero">
         <h1>Grow your Business with Webnophile</h1>
-        <p></p>
-        <a href="">Contact Now</a>
+        <p>We provide affordable and high-quality website solutions to help your business thrive.</p>
+        <a href="#contact">Contact Now</a>
     </section>
 
     <section id="about">
-        <h2>ABOUT US</h2>
-        <p>We specialize in creating websites that fit your budget perfectly.</p>
-       
+        <h2>About Us</h2>
+        <p>Welcome to Webnophile, where we specialize in creating custom websites tailored to your business needs. Our team of experts is dedicated to providing top-notch web solutions that help your business grow and succeed in the digital world.</p>
     </section>
 
-    <section id="Templates">
-        <h2>Available Templates</h2>
-       
+    <section id="templates">
+        <h2>Templates</h2>
+        <div class="wrapper">
+            <div class="items">
+                <div class="item" tabindex="0" style="background-image: url('(1).jpg');"></div>
+                <div class="item" tabindex="0" style="background-image: url('\(2\).jpg');"></div>
+                <div class="item" tabindex="0" style="background-image: url('\(3\).png');"></div>
+                <div class="item" tabindex="0" style="background-image: url('\(4\).jpg');"></div>
+                <div class="item" tabindex="0" style="background-image: url('\(1\).jpg');"></div>
+            </div>
+        </div>
     </section>
 
-    <section id="Our Previous Work">
+    <section id="previous-work">
         <h2>Our Previous Work</h2>
+        <div class="slider">
+            <div class="slides fade">
+                <img src="(1).jpg" alt="Work 1">
+            </div>
+            <div class="slides fade">
+                <img src="(2).jpg" alt="Work 2">
+            </div>
+            <div class="slides fade">
+                <img src="(3).png" alt="Work 3">
+            </div>
+            <div class="slides fade">
+                <img src="(4).jpg" alt="Work 4">
+            </div>
+            <div class="slides fade">
+                <img src="(1).jpg" alt="Work 5">
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <div class="dot-container">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+        </div>
     </section>
 
-    <section id="Contact Us">
-        <h2>Contact Us</h2>
-        <center>
-            <h5>Contact Us Through Email</h5>
-            <h4>webnophile@gmail.com</h4>
-            <h5>Contact Us Through Instagram</h5>
+    <section id="services">
+        <h2>Our Services</h2>
+        <p>At Webnophile, we offer a wide range of services including web design, development, SEO, and digital marketing to help your business succeed online.</p>
+    </section>
 
-        </center>
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>If you have any questions or would like to get started on your project, please don't hesitate to contact us at webnophile@gmail.com or call us at (123) 456-7890.</p>
     </section>
 
     <footer>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Templates</a></li>
-            <li><a href="#">Our Previous Work</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact Us</a></li>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#templates">Templates</a></li>
+            <li><a href="#previous-work">Our Previous Work</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact Us</a></li>
         </ul>
-        <p>&copy; 2024 Webnophile</p>
+        <p>&copy; 2024 Webnophile. All rights reserved.</p>
     </footer>
+
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("slides");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+        }
+    </script>
 </body>
 </html>
