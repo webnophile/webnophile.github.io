@@ -6,6 +6,8 @@
     <meta name="description" content="Webnophile - Grow your business with our custom website solutions.">
     <title>Webnophile</title>
     <link rel="icon" href="logo.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <style>
         body {
             background-color: black;
@@ -271,6 +273,11 @@
             opacity: 1;
             animation-play-state: running;
         }
+        .social-icons img {
+            width: 40px;
+            height: 40px;
+            margin: 0 10px;
+        }
     </style>
 </head>
 <body>
@@ -285,40 +292,54 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/webnophile?igsh=YmQ5MGF5MnN4b25t">
+                <img src="https://cdn.icon-icons.com/icons2/836/PNG/512/Instagram_icon-icons.com_66804.png" alt="Instagram">
+            </a>
+            <a href="mailto:webnophile@gmail.com">
+                <img src="mail.png">
+            </a>
+        </div>
     </header>
-    <section id="hero">
+
+    <div id="hero">
         <h1>Welcome to Webnophile</h1>
         <p>Grow your business with our custom website solutions.</p>
-        <a href="#contact">Get Started</a>
+        <a href="#about">Learn More</a>
+    </div>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>We specialize in creating stunning websites that help businesses grow.</p>
     </section>
+
     <section id="templates">
         <h2>Templates</h2>
         <div class="wrapper">
             <div class="items">
-                <div class="item" tabindex="0" style="background-image: url('(1).jpg');"></div>
-                <div class="item" tabindex="0" style="background-image: url('\(2\).jpg');"></div>
-                <div class="item" tabindex="0" style="background-image: url('\(3\).png');"></div>
-                <div class="item" tabindex="0" style="background-image: url('\(4\).jpg');"></div>
-                <div class="item" tabindex="0" style="background-image: url('\(1\).jpg');"></div>
+                <div class="item" style="background-image: url('(1).jpg');"></div>
+                <div class="item" style="background-image: url('(2).jpg');"></div>
+                <div class="item" style="background-image: url('\(3\).png');"></div>
+                <div class="item" style="background-image: url('(4).jpg');"></div>
+                <div class="item" style="background-image: url('(1).jpg');"></div>
             </div>
         </div>
-    </section>
-    <section id="about">
-        <h2>About Us</h2>
-        <p>Webnophile is dedicated to providing top-notch web development services to help your business thrive online. Our team of experts is committed to delivering exceptional results tailored to your unique needs.</p>
     </section>
 
     <section id="previous-work">
         <h2>Our Previous Work</h2>
         <div class="slider">
-            <div class="slides fade">
+            <div class="slides">
                 <img src="(1).jpg" alt="Previous Work 1">
             </div>
-            <div class="slides fade">
+            <div class="slides">
                 <img src="(2).jpg" alt="Previous Work 2">
             </div>
-            <div class="slides fade">
-                <img src="(3).png" alt="Previous Work 3">
+            <div class="slides">
+                <img src="(3).jpg" alt="Previous Work 3">
+            </div>
+            <div class="slides">
+                <img src="(4).jpg" alt="Previous Work 4">
             </div>
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -327,17 +348,18 @@
             <span class="dot" onclick="currentSlide(1)"></span>
             <span class="dot" onclick="currentSlide(2)"></span>
             <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
         </div>
     </section>
 
     <section id="services">
-        <h2>Our Services</h2>
-        <p>At Webnophile, we offer a wide range of web development services to help your business succeed online. From custom website design and development to SEO and digital marketing, we have you covered.</p>
+        <h2>Services</h2>
+        <p>We offer a range of services to help your business thrive online.</p>
     </section>
 
     <section id="contact">
         <h2>Contact Us</h2>
-        <p>We would love to hear from you! Get in touch with us to discuss your project requirements and how we can help you achieve your online goals.</p>
+        <p>Get in touch with us to discuss your project.</p>
     </section>
 
     <footer>
@@ -353,8 +375,25 @@
     </footer>
 
     <script>
-        let slideIndex = 1;
-        showSlides(slideIndex);
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("slides");
+            let dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+            setTimeout(showSlides, 5000); // Change image every 5 seconds
+        }
 
         function plusSlides(n) {
             showSlides(slideIndex += n);
@@ -363,37 +402,7 @@
         function currentSlide(n) {
             showSlides(slideIndex = n);
         }
-
-        function showSlides(n) {
-            let i;
-            let slides = document.getElementsByClassName("slides");
-            let dots = document.getElementsByClassName("dot");
-            if (n > slides.length) {slideIndex = 1}    
-            if (n < 1) {slideIndex = slides.length}
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex-1].style.display = "block";  
-            dots[slideIndex-1].className += " active";
-        }
-
-        // Intersection Observer for fade-in effect
-        const sections = document.querySelectorAll('section');
-
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('in-view');
-                }
-            });
-        });
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
     </script>
 </body>
 </html>
+
