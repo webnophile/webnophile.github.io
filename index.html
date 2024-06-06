@@ -13,6 +13,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
         }
         nav ul {
             list-style-type: none;
@@ -96,21 +97,18 @@
         }
         .prev, .next {
             cursor: pointer;
-            position: absolute;
+            position: center;
             top: 50%;
             width: auto;
             padding: 16px;
-            margin-top: -22px;
             color: white;
             font-weight: bold;
             font-size: 18px;
             transition: 0.6s ease;
-            border-radius: 0 3px 3px 0;
             user-select: none;
         }
         .next {
             right: 0;
-            border-radius: 3px 0 0 3px;
         }
         .prev:hover, .next:hover {
             background-color: rgba(0,0,0,0.8);
@@ -118,7 +116,6 @@
         .dot-container {
             text-align: center;
             padding: 20px;
-            background: #333;
         }
         .dot {
             cursor: pointer;
@@ -133,21 +130,6 @@
         .active, .dot:hover {
             background-color: #717171;
         }
-        .fade {
-            -webkit-animation-name: fade;
-            -webkit-animation-duration: 1.5s;
-            animation-name: fade;
-            animation-duration: 1.5s;
-        }
-        @-webkit-keyframes fade {
-            from {opacity: .4} 
-            to {opacity: 1}
-        }
-        @keyframes fade {
-            from {opacity: .4} 
-            to {opacity: 1}
-        }
-
         /* Media Queries */
         @media (max-width: 768px) {
             #hero h1 {
@@ -160,7 +142,6 @@
                 max-width: 90%;
             }
         }
-
         @media (max-width: 480px) {
             nav ul {
                 flex-direction: column;
@@ -194,7 +175,6 @@
             justify-content: center;
             height: 100vh;
         }
-
         :root {
             --index: calc(1vw + 1vh);
             --transition: cubic-bezier(.1, .7, 0, 1);
@@ -204,7 +184,6 @@
             gap: 0.4rem;
             perspective: calc(var(--index) * 35);
         }
-
         .item {
             width: calc(var(--index) * 3);
             height: calc(var(--index) * 12);
@@ -216,7 +195,6 @@
             transition: transform 1.25s var(--transition), filter 3s var(--transition), width 1.25s var(--transition);
             will-change: transform, filter, rotateY, width;
         }
-
         .item::before, .item::after {
             content: '';
             position: absolute;
@@ -224,66 +202,74 @@
             width: 20px;
             right: calc(var(--index) * -1);
         }
-
         .item::after {
             left: calc(var(--index) * -1);
         }
-
         .items .item:hover {
             filter: inherit;
             transform: translateZ(calc(var(--index) * 10));
         }
-
         .items .item:hover + * {
             filter: inherit;
             transform: translateZ(calc(var(--index) * 8.5)) rotateY(35deg);
             z-index: -1;
         }
-
         .items .item:hover + * + * {
             filter: inherit;
             transform: translateZ(calc(var(--index) * 5.6)) rotateY(40deg);
             z-index: -2;
         }
-
         .items .item:hover + * + * + * {
             filter: inherit;
             transform: translateZ(calc(var(--index) * 2.5)) rotateY(30deg);
             z-index: -3;
         }
-
         .items .item:hover + * + * + * + * {
             filter: inherit;
             transform: translateZ(calc(var(--index) * .6)) rotateY(15deg);
             z-index: -4;
         }
-
         .items .item:has( + :hover) {
             filter: inherit;
             transform: translateZ(calc(var(--index) * 8.5)) rotateY(-35deg);
         }
-
         .items .item:has( + * + :hover) {
             filter: inherit;
             transform: translateZ(calc(var(--index) * 5.6)) rotateY(-40deg);
         }
-
         .items .item:has( + * + * + :hover) {
             filter: inherit;
             transform: translateZ(calc(var(--index) * 2.5)) rotateY(-30deg);
         }
-
         .items .item:has( + * + * + * + :hover) {
             filter: inherit;
             transform: translateZ(calc(var(--index) * .6)) rotateY(-15deg);
         }
-
         .items .item:active, .items .item:focus {
             width: 28vw;
             filter: inherit;
             z-index: 100;
             transform: translateZ(calc(var(--index) * 10));
             margin: 0 .45vw;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        section {
+            animation: fadeIn 1s ease-in-out;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+        section.in-view {
+            opacity: 1;
+            animation-play-state: running;
         }
     </style>
 </head>
@@ -296,22 +282,15 @@
                 <li><a href="#templates">Templates</a></li>
                 <li><a href="#previous-work">Our Previous Work</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
-
     <section id="hero">
-        <h1>Grow your Business with Webnophile</h1>
-        <p>We provide affordable and high-quality website solutions to help your business thrive.</p>
-        <a href="#contact">Contact Now</a>
+        <h1>Welcome to Webnophile</h1>
+        <p>Grow your business with our custom website solutions.</p>
+        <a href="#contact">Get Started</a>
     </section>
-
-    <section id="about">
-        <h2>About Us</h2>
-        <p>Welcome to Webnophile, where we specialize in creating custom websites tailored to your business needs. Our team of experts is dedicated to providing top-notch web solutions that help your business grow and succeed in the digital world.</p>
-    </section>
-
     <section id="templates">
         <h2>Templates</h2>
         <div class="wrapper">
@@ -324,24 +303,22 @@
             </div>
         </div>
     </section>
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Webnophile is dedicated to providing top-notch web development services to help your business thrive online. Our team of experts is committed to delivering exceptional results tailored to your unique needs.</p>
+    </section>
 
     <section id="previous-work">
         <h2>Our Previous Work</h2>
         <div class="slider">
             <div class="slides fade">
-                <img src="(1).jpg" alt="Work 1">
+                <img src="(1).jpg" alt="Previous Work 1">
             </div>
             <div class="slides fade">
-                <img src="(2).jpg" alt="Work 2">
+                <img src="(2).jpg" alt="Previous Work 2">
             </div>
             <div class="slides fade">
-                <img src="(3).png" alt="Work 3">
-            </div>
-            <div class="slides fade">
-                <img src="(4).jpg" alt="Work 4">
-            </div>
-            <div class="slides fade">
-                <img src="(1).jpg" alt="Work 5">
+                <img src="(3).png" alt="Previous Work 3">
             </div>
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -350,19 +327,17 @@
             <span class="dot" onclick="currentSlide(1)"></span>
             <span class="dot" onclick="currentSlide(2)"></span>
             <span class="dot" onclick="currentSlide(3)"></span>
-            <span class="dot" onclick="currentSlide(4)"></span>
-            <span class="dot" onclick="currentSlide(5)"></span>
         </div>
     </section>
 
     <section id="services">
         <h2>Our Services</h2>
-        <p>At Webnophile, we offer a wide range of services including web design, development, SEO, and digital marketing to help your business succeed online.</p>
+        <p>At Webnophile, we offer a wide range of web development services to help your business succeed online. From custom website design and development to SEO and digital marketing, we have you covered.</p>
     </section>
 
     <section id="contact">
         <h2>Contact Us</h2>
-        <p>If you have any questions or would like to get started on your project, please don't hesitate to contact us at webnophile@gmail.com or call us at (123) 456-7890.</p>
+        <p>We would love to hear from you! Get in touch with us to discuss your project requirements and how we can help you achieve your online goals.</p>
     </section>
 
     <footer>
@@ -372,7 +347,7 @@
             <li><a href="#templates">Templates</a></li>
             <li><a href="#previous-work">Our Previous Work</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
         <p>&copy; 2024 Webnophile. All rights reserved.</p>
     </footer>
@@ -393,18 +368,32 @@
             let i;
             let slides = document.getElementsByClassName("slides");
             let dots = document.getElementsByClassName("dot");
-            if (n > slides.length) {slideIndex = 1}
+            if (n > slides.length) {slideIndex = 1}    
             if (n < 1) {slideIndex = slides.length}
             for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
+                slides[i].style.display = "none";  
             }
             for (i = 0; i < dots.length; i++) {
                 dots[i].className = dots[i].className.replace(" active", "");
             }
-            slides[slideIndex-1].style.display = "block";
+            slides[slideIndex-1].style.display = "block";  
             dots[slideIndex-1].className += " active";
         }
+
+        // Intersection Observer for fade-in effect
+        const sections = document.querySelectorAll('section');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
     </script>
 </body>
 </html>
-
