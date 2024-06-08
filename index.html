@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Webnophile - Grow your business with our custom website solutions.">
-    <meta name="keywords" content="web development, custom websites, business growth">
     <title>Webnophile</title>
-    <link rel="icon" href="logo.jpg">
+    <link rel="icon" href="logo.jpeg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 
     <style>
         body {
-            background-color: black;
-            color: white;
+            background-color: rgb(248, 246, 246);
+            color: rgb(0, 0, 0);
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -20,6 +21,7 @@
         }
         nav ul {
             list-style-type: none;
+         
             padding: 0;
             display: flex;
             justify-content: space-around;
@@ -36,7 +38,7 @@
             display: block;
         }
         nav ul li a:hover {
-            background-color: #575757;
+            background-color: #7bd5f8;
         }
         #hero {
             text-align: center;
@@ -52,7 +54,7 @@
         }
         #hero a {
             text-decoration: none;
-            background-color: #f90;
+            background-color: #008cff;
             color: black;
             padding: 10px 20px;
             border-radius: 5px;
@@ -104,7 +106,7 @@
             top: 50%;
             width: auto;
             padding: 16px;
-            color: white;
+            color: rgb(5, 5, 5);
             font-weight: bold;
             font-size: 18px;
             transition: 0.6s ease;
@@ -125,7 +127,7 @@
             height: 15px;
             width: 15px;
             margin: 0 2px;
-            background-color: #bbb;
+            background-color: #070707;
             border-radius: 50%;
             display: inline-block;
             transition: background-color 0.6s ease;
@@ -172,89 +174,104 @@
                 margin: 10px 0;
             }
         }
-        .wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        :root {
-            --index: calc(1vw + 1vh);
-            --transition: cubic-bezier(.1, .7, 0, 1);
-        }
-        .items {
-            display: flex;
-            gap: 0.4rem;
-            perspective: calc(var(--index) * 35);
-        }
-        .item {
-            width: calc(var(--index) * 3);
-            height: calc(var(--index) * 12);
-            background-color: #222;
-            background-size: cover;
-            background-position: center;
-            cursor: pointer;
-            filter: grayscale(1) brightness(.5);
-            transition: transform 1.25s var(--transition), filter 3s var(--transition), width 1.25s var(--transition);
-            will-change: transform, filter, rotateY, width;
-        }
-        .item::before, .item::after {
-            content: '';
-            position: absolute;
-            height: 100%;
-            width: 20px;
-            right: calc(var(--index) * -1);
-        }
-        .item::after {
-            left: calc(var(--index) * -1);
-        }
-        .items .item:hover {
-            filter: inherit;
-            transform: translateZ(calc(var(--index) * 10));
-        }
-        .items .item:hover + * {
-            filter: inherit;
-            transform: translateZ(calc(var(--index) * 8.5)) rotateY(35deg);
-            z-index: -1;
-        }
-        .items .item:hover + * + * {
-            filter: inherit;
-            transform: translateZ(calc(var(--index) * 5.6)) rotateY(40deg);
-            z-index: -2;
-        }
-        .items .item:hover + * + * + * {
-            filter: inherit;
-            transform: translateZ(calc(var(--index) * 2.5)) rotateY(30deg);
-            z-index: -3;
-        }
-        .items .item:hover + * + * + * + * {
-            filter: inherit;
-            transform: translateZ(calc(var(--index) * .6)) rotateY(15deg);
-            z-index: -4;
-        }
-        .items .item:has( + :hover) {
-            filter: inherit;
-            transform: translateZ(calc(var(--index) * 8.5)) rotateY(-35deg);
-        }
-        .items .item:has( + * + :hover) {
-            filter: inherit;
-            transform: translateZ(calc(var(--index) * 5.6)) rotateY(-40deg);
-        }
-        .items .item:has( + * + * + :hover) {
-            filter: inherit;
-            transform: translateZ(calc(var(--index) * 2.5)) rotateY(-30deg);
-        }
-        .items .item:has( + * + * + * + :hover) {
-            filter: inherit;
-            transform: translateZ(calc(var(--index) * .6)) rotateY(-15deg);
-        }
-        .items .item:active, .items .item:focus {
-            width: 28vw;
-            filter: inherit;
-            z-index: 100;
-            transform: translateZ(calc(var(--index) * 10));
-            margin: 0 .45vw;
-        }
+        .wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+:root{
+    --index: calc(1vw + 1vh);
+    --transition: cubic-bezier(.1, .7, 0, 1);
+}
+.items{
+    display: flex;
+    gap: 0.4rem;
+    perspective: calc(var(--index) * 35);
+}
+
+.item{
+    width: calc(var(--index) * 3);
+    height: calc(var(--index) * 12);
+    background-color: #222;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    filter: grayscale(1) brightness(.5);
+    transition: transform 1.25s var(--transition), filter 3s var(--transition), width 1.25s var(--transition);
+    will-change: transform, filter, rotateY, width;
+}
+
+.item::before, .item::after{
+    content: center;
+    position: absolute;
+    height: 100%;
+    width: 20px;
+    right: calc(var(--index) * -1);
+}
+
+.item::after{
+    left: calc(var(--index) * -1);
+    position: fixed;
+}
+
+.items .item:hover{
+    filter: inherit;
+    transform: translateZ(calc(var(--index) * 10));
+}
+
+.items .item:hover + *{
+    filter: inherit;
+    transform: translateZ(calc(var(--index) * 8.5)) rotateY(35deg);
+    z-index: -1;
+}
+
+.items .item:hover + * + *{
+    filter: inherit;
+    transform: translateZ(calc(var(--index) * 5.6)) rotateY(40deg);
+    z-index: -2;
+}
+
+.items .item:hover + * + * + *{
+    filter: inherit;
+    transform: translateZ(calc(var(--index) * 2.5)) rotateY(30deg);
+    z-index: -3;
+}
+
+.items .item:hover + * + * + * + *{
+    filter: inherit;
+    transform: translateZ(calc(var(--index) * .6)) rotateY(15deg);
+    z-index: -4;
+}
+
+.items .item:has( + :hover){
+    filter: inherit;
+    transform: translateZ(calc(var(--index) * 8.5)) rotateY(-35deg);
+}
+
+.items .item:has( + * + :hover){
+    filter: inherit;
+    transform: translateZ(calc(var(--index) * 5.6)) rotateY(-40deg);
+}
+
+.items .item:has( + * + * + :hover){
+    filter: inherit;
+    transform: translateZ(calc(var(--index) * 2.5)) rotateY(-30deg);
+}
+
+.items .item:has( + * + * + * + :hover){
+    filter: inherit;
+    transform: translateZ(calc(var(--index) * .6)) rotateY(-15deg);
+}
+
+.items .item:active, .items .item:focus {
+	width: 28vw;
+	filter: inherit;
+	z-index: 100;
+	transform: translateZ(calc(var(--index) * 10));
+    margin: 0 .45vw;
+}
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -279,6 +296,68 @@
             height: 40px;
             margin: 0 10px;
         }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .why-choose-us {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .feature {
+            flex: 1 1 calc(33.333% - 40px);
+            background: #f9f9f9;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .feature:hover {
+            transform: scale(1.05);
+        }
+        .feature-icon {
+            font-size: 50px;
+            color: #007BFF;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .feature-title {
+            font-size: 1.5em;
+            color: #007BFF;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .feature-desc {
+            text-align: center;
+            color: #555;
+        }
+        @media (max-width: 768px) {
+            .feature {
+                flex: 1 1 calc(50% - 20px);
+            }
+        }
+        @media (max-width: 500px) {
+            .feature {
+                flex: 1 1 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -289,7 +368,7 @@
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#templates">Templates</a></li>
                 <li><a href="#previous-work">Our Previous Work</a></li>
-                <li><a href="#services">Services</a></li>
+                <li><a href="Why Choose Us?">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -311,9 +390,15 @@
 
     <section id="about">
         <h2>About Us</h2>
-        <p>We specialize in creating stunning websites that help businesses grow.</p>
+        <div class="about-content">
+            <img src="https://via.placeholder.com/800x400.png?text=Webnophile+Team" alt="Webnophile Team" class="about-image">
+            <p><i class="fas fa-rocket"></i> Welcome to Webnophile, where passion for web design and development meets innovation and excellence. We are a team of dedicated professionals committed to crafting exceptional digital experiences that not only meet but exceed your expectations.</p>
+            <p><i class="fas fa-bullseye"></i> Our mission is to empower businesses with top-notch web solutions that drive growth and success. With a blend of creativity and technical expertise, we turn ideas into reality, delivering user-friendly and visually stunning websites.</p>
+            <p><i class="fas fa-laptop-code"></i> From custom website designs to comprehensive web development, we offer a range of services tailored to meet your unique needs. Let’s build something great together!</p>
+        </div>
     </section>
-
+    
+    
     <section id="templates">
         <h2>Templates</h2>
         <div class="wrapper">
@@ -352,26 +437,61 @@
             <span class="dot" onclick="currentSlide(4)"></span>
         </div>
     </section>
-
-    <section id="services">
-        <h2>Services</h2>
-        <p>We offer a range of services to help your business thrive online.</p>
+    <section id="Why Choose Us?">
+    <div class="container">
+        <h2>Why Choose Us?</h2>
+        <div class="why-choose-us">
+            <div class="feature">
+                <div class="feature-icon">&#128187;</div>
+                <div class="feature-title">Expert Team</div>
+                <div class="feature-desc">Our team comprises skilled designers, developers, and digital strategists passionate about what they do.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">&#128101;</div>
+                <div class="feature-title">Customer Focus</div>
+                <div class="feature-desc">We prioritize your needs and work diligently to achieve your goals.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">&#128640;</div>
+                <div class="feature-title">Innovation</div>
+                <div class="feature-desc">We stay ahead of industry trends and use the latest technologies to deliver cutting-edge solutions.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">&#9989;</div>
+                <div class="feature-title">Quality Assurance</div>
+                <div class="feature-desc">Our rigorous quality assurance process ensures your website is flawless and high-performing.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">&#128176;</div>
+                <div class="feature-title">Affordable Pricing</div>
+                <div class="feature-desc">We offer competitive pricing without compromising on quality.</div>
+            </div>
+        </div>
+    </div>
     </section>
-
     <section id="contact">
         <h2>Contact Us</h2>
-        <p> Instagram: webnophile</p>
-        <p> Email us: webnophile@gmail.com</p>
-        <p>Get in touch with us to discuss your project.</p>
+        <div class="contact-info">
+            <p><i class="fab fa-instagram"></i> Instagram: <a href="https://instagram.com/webnophile" target="_blank">@webnophile</a></p>
+            <p><i class="fas fa-envelope"></i> Email: <a href="mailto:webnophile@gmail.com">webnophile@gmail.com</a></p>
+            <p>Get in touch with us to discuss your project.</p>
+        </div>
+        <div class="contact-form">
+            <form action="https://formspree.io/f/xeqybyoj" method="post">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
     </section>
-
     <footer>
         <ul>
             <li><a href="#hero">Home</a></li>
             <li><a href="#about">About Us</a></li>
             <li><a href="#templates">Templates</a></li>
             <li><a href="#previous-work">Our Previous Work</a></li>
-            <li><a href="#services">Services</a></li>
+            <li><a href="#Why Choose Us?">Services</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <p>&copy; 2024 Webnophile. All rights reserved.</p>
@@ -408,4 +528,3 @@
     </script>
 </body>
 </html>
-
